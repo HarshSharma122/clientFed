@@ -16,9 +16,15 @@ const clientSchema = new mongoose.Schema<clientTypes>(
       required: true,
     },
 
-    websiteUrl: { type: String },
+    websiteurl: { type: String },
     phoneno: { type: String},
 
+
+    status:{
+      type:String,
+      enum:["active", "archived"],
+      default:"active"
+    },
     addedBy: {
       type: mongoose.Types.ObjectId,
       ref:"USER",

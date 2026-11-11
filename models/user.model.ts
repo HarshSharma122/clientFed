@@ -16,7 +16,7 @@ const userSchema = new mongoose.Schema<userTypes>(
       required: true,
     },
 
-    websiteUrl: { type: String },
+    websiteurl: { type: String },
     phoneno: { type: String },
 
     role: {

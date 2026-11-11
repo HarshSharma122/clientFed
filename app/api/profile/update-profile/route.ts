@@ -19,12 +19,12 @@ export const PATCH = async (req: NextRequest) => {
       });
     }
 
-    const { username, phoneno, websiteUrl, email } = await req.json();
+    const { username, phoneno, websiteurl, email } = await req.json();
 
     const updatedData = {
       ...(username && { username }),
       ...(phoneno && { phoneno }),
-      ...(websiteUrl && { websiteUrl }),
+      ...(websiteurl && { websiteurl }),
       ...(email && { email }),
     };
     await USER.findOneAndUpdate(

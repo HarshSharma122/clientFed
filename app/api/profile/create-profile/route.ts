@@ -19,8 +19,8 @@ export const POST = async (req: NextRequest) => {
       });
     }
 
-    const { name, phoneno, websiteUrl } = await req.json();
-    if (!name || !phoneno || !websiteUrl) {
+    const { name, phoneno, websiteurl } = await req.json();
+    if (!name || !phoneno || !websiteurl) {
       return NextResponse.json({
         status: 411,
         message: "Incorrect inputs",
@@ -34,7 +34,7 @@ export const POST = async (req: NextRequest) => {
     await USER.findOneAndUpdate({_id:user._id}, {
         username:name,
         phoneno,
-        websiteUrl
+        websiteurl
     })
 
 
