@@ -10,6 +10,7 @@ export interface userTypes {
   phoneno?: string;
 
   role?: string;
+  plan:"free" | "pro";
   createdAt: Date;
   updatedAt: Date;
 }
