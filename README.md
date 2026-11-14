@@ -4,11 +4,11 @@
 
 ClientFed is a project management platform I'm building for freelance developers and small agencies to manage their client projects more efficiently.
 
-The goal is to make communication between freelancers and clients easier by bringing project milestones, deliverables, feedback, and approvals together in one platform.
+The goal is to make communication between freelancers and clients easier by bringing project milestones, deliverables, feedback, and approvals together in one place.
 
 ## Why ClientFed?
 
-While working on different software projects, I wanted to build something that solves a real problem for freelancers and small development teams.
+I wanted to build a project that solves a real-world problem while improving my software development skills.
 
 Client communication can become difficult to manage when project updates, files, feedback, and change requests are scattered across different platforms.
 
@@ -16,19 +16,31 @@ ClientFed aims to provide one organized space where freelancers can manage their
 
 ## Features
 
-### Implemented
+### Completed
+
 - Custom user authentication.
 - User registration and login.
-- Authentication and protected routes.
+- Protected routes and authentication checks.
+- Add new clients.
+- View and manage the client list.
+- Store client details, including name, email, company name, website, and phone number.
+- Track client status (Active / Archived).
 
-### Planned
-- **Project Management:** Create and manage client projects.
-- **Client Management:** Add clients and give them access to their projects.
-- **Milestone Management:** Create project milestones, share them with clients, and collect feedback.
-- **Deliverables Management:** Upload and share project files, links, and completed work.
-- **Feedback & Change Requests:** Allow clients to review work and request changes.
-- **Client Approvals:** Let clients approve submitted work.
-- **Project Dashboard:** Track project progress and activities.
+
+
+## Screenshots
+
+### Add Client
+
+Add a new client by providing their contact and company information.
+
+![Add Client Screenshot](./screenshots/add-client.png)
+
+### Client List
+
+View and manage all added clients, including their contact details, company information, and status.
+
+![Client List Screenshot](./screenshots/client-list.png)
 
 ## Tech Stack
 
@@ -62,14 +74,14 @@ npm install
 
 ### 4. Configure environment variables
 
-Create a `.env` file in the root directory and add the required environment variables.
+Create a `.env` file in the root directory.
 
 ```env
 MONGODB_URI=your_mongodb_connection_string
-secret_token = your secret token for JWT
+secret_token=your_jwt_secret
 ```
 
-Add any other environment variables required by your authentication implementation.
+Add any other environment variables required by your implementation.
 
 ### 5. Start the development server
 
@@ -77,22 +89,22 @@ Add any other environment variables required by your authentication implementati
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) in your browser.
+Open [http://localhost:5900](http://localhost:5900) in your browser.
 
 ## Project Status
 
-<ins>Currently in Development</ins>
+**Currently in Development**
 
-Authentication is implemented, and I'm actively working on the remaining features.
+Authentication and client management features are implemented. I'm currently working on the remaining modules.
 
-This project is being developed from scratch as a learning and building experience. I'll continue improving it and adding features as development progresses.
+ClientFed is being built from scratch using my own development skills. I'll continue adding features and improving the platform as development progresses.
 
 ## Connect
 
 **Developer:** Harsh Sharma
 
 - GitHub: [HarshSharma122](https://github.com/HarshSharma122)
-- Project Repository: [ClientFed](https://github.com/HarshSharma122/clientFed)
+- Project Repository: [ClientFed](https://github.com/HarshSharma122/clientfed)
 
 ---
 
