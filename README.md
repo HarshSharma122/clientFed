@@ -45,13 +45,13 @@ Follow these steps to run ClientFed locally.
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/HarshSharma122/clientFed.git
+git clone https://github.com/HarshSharma122/clientfed.git
 ```
 
 ### 2. Navigate to the project
 
 ```bash
-cd clientFed
+cd clientfed
 ```
 
 ### 3. Install dependencies
@@ -62,10 +62,11 @@ npm install
 
 ### 4. Configure environment variables
 
-Create a `.env.local` file in the root directory and add the required environment variables.
+Create a `.env` file in the root directory and add the required environment variables.
 
 ```env
 MONGODB_URI=your_mongodb_connection_string
+secret_token = your secret token for JWT
 ```
 
 Add any other environment variables required by your authentication implementation.
