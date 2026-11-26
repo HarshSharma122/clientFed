@@ -19,7 +19,7 @@ import {
   Users,
 } from "lucide-react";
 import { useState } from "react";
-import Addclient from "./addclient";
+import AddProject from "./addProject";
 
 const stats = [
   {
@@ -123,14 +123,15 @@ const activities = [
 const Dashboard = () => {
 
 
-  const [isopenaddClient, setIsOpenaddClient] = useState(false);
+
+  const [isopenaddProject, setIsOpenaddProject] = useState(false);
 
 
   return (
 
     <>
       <main className="min-h-screen px-4 py-6 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-[1500px] space-y-7">
+        <div className="mx-auto max-w-375 space-y-7">
 
           {/* Header */}
           <header className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
@@ -153,14 +154,11 @@ const Dashboard = () => {
                 <Bell size={19} />
               </Button>
 
-              <Button className="flex h-11 items-center justify-center gap-2 rounded-xl bg-[#6941C6] px-5 text-sm font-medium text-white shadow-sm transition hover:bg-[#5835AD]">
+              <Button onClick={()=>setIsOpenaddProject(true)} className="flex h-11 items-center justify-center gap-2 rounded-xl bg-[#6941C6] px-5 text-sm font-medium text-white shadow-sm transition hover:bg-[#5835AD]">
                 <Plus size={18} />
                 New Project
               </Button>
-              <Button onClick={() => setIsOpenaddClient(true)} variant="outline" className="flex h-11 items-center justify-center gap-2 rounded-xl px-5 text-sm font-medium">
-                <Plus size={18} />
-                Add client
-              </Button>
+              
             </div>
           </header>
 
@@ -445,9 +443,12 @@ const Dashboard = () => {
       </main>
 
 
+    
+
+
       {
-        isopenaddClient && (
-          <Addclient setIsOpenaddClient={setIsOpenaddClient} />
+        isopenaddProject && (
+          <AddProject  setIsOpenaddProject={setIsOpenaddProject}/>
         )
       }
     </>

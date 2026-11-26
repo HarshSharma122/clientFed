@@ -22,10 +22,9 @@ const userSchema = new mongoose.Schema<userTypes>(
     role: {
       type: String,
       required: true,
+      enum:["user", "client", "admin"],
       default: "user",
     },
-
-
 
 
     plan:{

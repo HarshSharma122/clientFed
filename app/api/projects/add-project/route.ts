@@ -17,24 +17,19 @@ export const POST = async (req: NextRequest) => {
         message: "Please login first",
       });
     }
+
     const {
       project_name,
       project_desc,
       project_category,
-      project_start_date,
       preview_URL,
-      client,
       deadline,
-      project_cover_img,
     } = await req.json();
 
     if (
       !project_name ||
       !project_desc ||
-      !project_category ||
-      !project_start_date ||
-      !preview_URL ||
-      !client
+      !project_category
     ) {
       return NextResponse.json({
         status: 411,
@@ -46,17 +41,14 @@ export const POST = async (req: NextRequest) => {
       project_name,
       project_desc,
       project_category,
-      project_start_date,
       preview_URL,
-      client,
       deadline,
-      project_cover_img,
       addedBy: user._id,
     });
 
     return NextResponse.json({
-      status: 200,
-      message: "proejct added!",
+      status: 202,
+      message: "project added!",
     });
   } catch (error) {
     return NextResponse.json({ status: 500, message: "Internal server Error" });

@@ -15,19 +15,25 @@ const clientSchema = new mongoose.Schema<clientTypes>(
       type: String,
       required: true,
     },
-
     websiteurl: { type: String },
-    phoneno: { type: String},
-
-
-    status:{
-      type:String,
-      enum:["active", "archived"],
-      default:"active"
+    phoneno: { type: String },
+    status: {
+      type: String,
+      enum: ["active", "archived"],
+      default: "active",
     },
+    invitationstatus: {
+      type: String,
+      enum: ["accept", "declined"],
+    },
+    invitationLink: {
+      type: String,
+      required: true,
+    },
+   
     addedBy: {
       type: mongoose.Types.ObjectId,
-      ref:"USER",
+      ref: "USER",
       required: true,
     },
   },
@@ -35,7 +41,6 @@ const clientSchema = new mongoose.Schema<clientTypes>(
     timestamps: true,
   },
 );
-
 
 const CLIENTS = models?.CLIENTS || mongoose.model("CLIENTS", clientSchema);
 

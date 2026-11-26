@@ -9,8 +9,8 @@ export interface userTypes {
   websiteurl?: string;
   phoneno?: string;
 
-  role?: string;
-  plan:"free" | "pro";
+  role?: "user" | "client" | "admin";
+  plan: "free" | "pro";
   createdAt: Date;
   updatedAt: Date;
 }
@@ -19,14 +19,12 @@ export interface clientTypes {
   clientname: string;
   email: string;
   companyname: string;
-
   websiteurl?: string;
   phoneno?: string;
-
   addedBy: object;
-
   status: string;
-
+  invitationstatus: "accept" | "declined";
+  invitationLink: string;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -45,7 +43,7 @@ export interface projectTypes {
 
   milestones: [milestonesType];
 
-  client: object;
+  client: clientTypes;
   addedBy: object;
 
   createdAt: Date;

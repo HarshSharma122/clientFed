@@ -22,7 +22,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={cn("h-full", "antialiased", bricolage.className)}
     >
       <body className="min-h-full flex flex-col">
-      <Toaster position="bottom-right" />
+      <Toaster position="top-right" richColors />
         {children}
       </body>
     </html>

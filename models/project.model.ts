@@ -57,14 +57,12 @@ const projectSchema = new mongoose.Schema<projectTypes>(
     },
     project_start_date: {
       type: String,
-      required: true,
     },
     deadline: {
       type: String,
-    }, // optinal
+    },
     preview_URL: {
       type: String,
-      required: true,
     },
 
     project_status: {
@@ -91,12 +89,12 @@ const projectSchema = new mongoose.Schema<projectTypes>(
 
     project_cover_img: {
       type: String,
-    }, // optinal
+    },
 
     client: {
       type: mongoose.Types.ObjectId,
       ref: "CLIENTS",
-      required: true,
+    
     },
 
     addedBy: {
