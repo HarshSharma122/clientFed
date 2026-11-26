@@ -8,6 +8,7 @@ import { checkUser } from "@/utils/checkuser";
 import CLIENTS from "@/models/client.model";
 import crypto from "crypto";
 import USER from "@/models/user.model";
+import PROJECTS from "@/models/project.model";
 
 /*
 
@@ -36,7 +37,7 @@ export const POST = async (req: NextRequest) => {
       });
     }
 
-    const { clientname, email, companyname, phoneno, websiteurl } =
+    const { clientname, email, companyname, phoneno, websiteurl, projectId } =
       await req.json();
     if (!clientname || !phoneno || !companyname || !email) {
       return NextResponse.json({
@@ -48,30 +49,47 @@ export const POST = async (req: NextRequest) => {
     // check this email in users collection
 
     const existUser = await USER.findOne({
-      email: email,
+      email: email.trim().toLowerCase(),
     });
-    if (existUser.role == "user") {
+
+    if (existUser?.role === "user") {
       return NextResponse.json({
         status: 411,
         message:
           "this email is already exist for user you can not add this for client....",
       });
-    }
-
-    if (existUser.role == "client") {
+    } else if (existUser?.role === "client") {
       return NextResponse.json({
         status: 411,
         message: "this client is already exist with this email...",
       });
     }
 
-    const findClient = await CLIENTS.findOne({ email: email });
-
-    if (findClient && findClient.invitationstatus != "accepted") {
+    const findClient = await CLIENTS.findOne({
+      email: email.trim().toLowerCase(),
+    });
+    if (findClient) {
       return NextResponse.json({
         status: 411,
-        message:
-          "Already exist this client but invitation is not accepted till now",
+        message: "Already exist this client so please choose other option...",
+      });
+    }
+
+    // Find project owned by the logged-in user
+    const findProject = await PROJECTS.findOne({
+      _id: projectId,
+      addedBy: user._id,
+    });
+
+    if (!findProject) {
+      return NextResponse.json({ message: "Project not found", status: 404 });
+    }
+
+    // Check if project already has a client
+    if (findProject.client) {
+      return NextResponse.json({
+        message: "This project already has a client",
+        status: 409,
       });
     }
 

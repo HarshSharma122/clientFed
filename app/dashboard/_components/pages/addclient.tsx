@@ -1,5 +1,5 @@
 import { Button } from '@/components/ui/button';
-import { Copy, Link2, X } from 'lucide-react';
+import { Copy, Link2, Users, X } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { FormEvent, useState } from 'react';
 import { toast } from 'sonner';
@@ -7,7 +7,7 @@ import { toast } from 'sonner';
 
 
 
-const Addclient = ({ setIsOpenaddClient }: { setIsOpenaddClient: Function }) => {
+const Addclient = ({ setIsOpenaddClient, projectId }: { setIsOpenaddClient: Function , projectId:any}) => {
     const [isSubmit, setIsSubmit] = useState(false);
     const [invitationLink, setInvitationLink] = useState("");
     const [isCopied, setIsCopied] = useState(false);
@@ -38,7 +38,8 @@ const Addclient = ({ setIsOpenaddClient }: { setIsOpenaddClient: Function }) => 
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                    ...input
+                    ...input,
+                    projectId:projectId
                 })
             })
 
@@ -145,85 +146,149 @@ const Addclient = ({ setIsOpenaddClient }: { setIsOpenaddClient: Function }) => 
 
 
     return (
-        <div className='fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50 p-4'>
-            <div className="bg-white w-full max-w-md  rounded-xl p-6 shadow-lg">
-                <div className="flex justify-between items-center mb-5">
-                    <h2 className="text-xl font-medium">Add a client</h2>
+        <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50 p-4">
 
-                    <button onClick={() => setIsOpenaddClient(false)} className="text-xl">
-                        ✕
+            <div className="bg-white w-full max-w-lg rounded-2xl p-6 shadow-2xl border border-gray-100">
+
+                {/* Header */}
+                <div className="flex items-start justify-between mb-6">
+
+                    <div className="flex items-start gap-3">
+                        <div className="h-11 w-11 rounded-xl bg-black text-white flex items-center justify-center">
+                            <Users size={20} />
+                        </div>
+
+                        <div>
+                            <h2 className="text-lg font-semibold text-gray-900">
+                                Add a new client
+                            </h2>
+                            <p className="text-sm text-gray-500 mt-1">
+                                Add client details to keep your projects organized.
+                            </p>
+                        </div>
+                    </div>
+
+                    <button
+                        type="button"
+                        onClick={() => setIsOpenaddClient(false)}
+                        className="p-1.5 rounded-lg text-gray-400 hover:text-gray-700 hover:bg-gray-100 transition"
+                    >
+                        <X size={18} />
                     </button>
+
                 </div>
 
-                <form className="space-y-4">
-                    <input
-                        type="text"
-                        name="clientname"
-                        value={input.clientname}
-                        onChange={handleChange}
-                        placeholder="client name"
-                        className="w-full border rounded-lg p-2"
-                        required
-                    />
-                    <input
-                        type="text"
-                        value={input.companyname}
-                        onChange={handleChange}
-                        name="companyname"
-                        placeholder="companyname"
-                        className="w-full border rounded-lg p-2"
-                        required
-                    />
-                    <input
-                        type="email"
-                        value={input.email}
-                        onChange={handleChange}
-                        name="email"
-                        placeholder="Email"
-                        className="w-full border rounded-lg p-2"
-                        required
-                    />
-                    <input
-                        type="email"
-                        value={input.phoneno}
-                        onChange={handleChange}
-                        name="phoneno"
-                        placeholder="phone no"
-                        className="w-full border rounded-lg p-2"
-                        required
-                    />
-                    <input
-                        type="email"
-                        value={input.websiteurl}
-                        onChange={handleChange}
-                        name="websiteurl"
-                        placeholder="website url (optinal)"
-                        className="w-full border rounded-lg p-2"
-                        required
-                    />
+                {/* Form */}
+                <form onSubmit={Submit} className="space-y-4">
 
+                    {/* Client Name */}
+                    <div className="space-y-1.5">
+                        <label className="text-sm font-medium text-gray-700">
+                            Client name
+                        </label>
 
+                        <input
+                            type="text"
+                            name="clientname"
+                            value={input.clientname}
+                            onChange={handleChange}
+                            placeholder="Enter client name"
+                            className="w-full border border-gray-200 rounded-xl px-3.5 py-2.5 text-sm outline-none focus:border-black focus:ring-2 focus:ring-black/5 transition"
+                            required
+                        />
+                    </div>
 
-                    <div className="flex gap-3 pt-2">
+                    {/* Company Name */}
+                    <div className="space-y-1.5">
+                        <label className="text-sm font-medium text-gray-700">
+                            Company name
+                        </label>
+
+                        <input
+                            type="text"
+                            name="companyname"
+                            value={input.companyname}
+                            onChange={handleChange}
+                            placeholder="Enter company name"
+                            className="w-full border border-gray-200 rounded-xl px-3.5 py-2.5 text-sm outline-none focus:border-black focus:ring-2 focus:ring-black/5 transition"
+                            required
+                        />
+                    </div>
+
+                    {/* Email */}
+                    <div className="space-y-1.5">
+                        <label className="text-sm font-medium text-gray-700">
+                            Email address
+                        </label>
+
+                        <input
+                            type="email"
+                            name="email"
+                            value={input.email}
+                            onChange={handleChange}
+                            placeholder="client@example.com"
+                            className="w-full border border-gray-200 rounded-xl px-3.5 py-2.5 text-sm outline-none focus:border-black focus:ring-2 focus:ring-black/5 transition"
+                            required
+                        />
+                    </div>
+
+                    {/* Phone */}
+                    <div className="space-y-1.5">
+                        <label className="text-sm font-medium text-gray-700">
+                            Phone number
+                        </label>
+
+                        <input
+                            type="tel"
+                            name="phoneno"
+                            value={input.phoneno}
+                            onChange={handleChange}
+                            placeholder="Enter phone number"
+                            className="w-full border border-gray-200 rounded-xl px-3.5 py-2.5 text-sm outline-none focus:border-black focus:ring-2 focus:ring-black/5 transition"
+                            required
+                        />
+                    </div>
+
+                    {/* Website */}
+                    <div className="space-y-1.5">
+                        <label className="text-sm font-medium text-gray-700">
+                            Website <span className="text-gray-400 font-normal">(optional)</span>
+                        </label>
+
+                        <input
+                            type="url"
+                            name="websiteurl"
+                            value={input.websiteurl}
+                            onChange={handleChange}
+                            placeholder="https://example.com"
+                            className="w-full border border-gray-200 rounded-xl px-3.5 py-2.5 text-sm outline-none focus:border-black focus:ring-2 focus:ring-black/5 transition"
+                        />
+                    </div>
+
+                    {/* Buttons */}
+                    <div className="flex gap-3 pt-3">
+
                         <Button
-                            onClick={Submit}
                             disabled={isSubmit}
                             type="submit"
-                            className={`flex-1  px-5  h-11`}
+                            className="flex-1 h-11 rounded-xl"
                         >
-                            add client
+                            {isSubmit ? "Adding client..." : "Add client"}
                         </Button>
 
                         <Button
                             onClick={() => setIsOpenaddClient(false)}
                             type="button"
                             variant="outline"
-                            className="flex-1 h-11  px-5 "
+                            className="flex-1 h-11 rounded-xl"
                         >
                             Cancel
                         </Button>
+
                     </div>
+
                 </form>
+
             </div>
         </div>
     )

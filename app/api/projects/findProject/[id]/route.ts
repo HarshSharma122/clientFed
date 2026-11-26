@@ -5,6 +5,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import dbConnect from "@/lib/db";
 import { checkUser } from "@/utils/checkuser";
+import CLIENTS from "@/models/client.model";
 import PROJECTS from "@/models/project.model";
 
 export const GET = async (
@@ -31,7 +32,10 @@ export const GET = async (
       });
     }
 
-    const project = await PROJECTS.findOne({ _id: id });
+    const project = await PROJECTS.findOne({ _id: id }).populate({
+      path: "client",
+      model: CLIENTS,
+    });
 
     if (!project) {
       return NextResponse.json({

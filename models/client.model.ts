@@ -10,6 +10,8 @@ const clientSchema = new mongoose.Schema<clientTypes>(
     email: {
       type: String,
       required: true,
+      trim: true,
+      lowercase: true,
     },
     companyname: {
       type: String,
@@ -30,7 +32,7 @@ const clientSchema = new mongoose.Schema<clientTypes>(
       type: String,
       required: true,
     },
-   
+
     addedBy: {
       type: mongoose.Types.ObjectId,
       ref: "USER",

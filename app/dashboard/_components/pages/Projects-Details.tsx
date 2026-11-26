@@ -2,13 +2,14 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { projectTypes } from '@/types/types';
-import { ArrowLeft, Building2, CalendarDays, CheckCircle2, Flag, FolderOpen, MessageSquare, MoveLeft, Plus, Share2 } from 'lucide-react';
+import { ArrowLeft, Building2, CalendarDays, CheckCircle2, ChevronRight, Flag, FolderOpen, MessageSquare, MoveLeft, Plus, Share2 } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react'
 import { toast } from 'sonner';
 import Overview from './project-taps/overview';
 import Addclient from './addclient';
+import AddOldclient from './addOldClient';
 
 const ProjectsDetails = ({ projectId }: { projectId: any }) => {
     //   now i send this id to server and check this id is present or not 
@@ -16,6 +17,12 @@ const ProjectsDetails = ({ projectId }: { projectId: any }) => {
     const [project, setProject] = useState<projectTypes>();
     const [Pending, setPending] = useState(true);
     const [isopenaddClient, setIsOpenaddClient] = useState(false);
+    const [isOpenoldClient, setIsOpenOldClient] = useState(false);
+
+
+
+
+
 
     const completedMilestones = 10;
 
@@ -64,268 +71,378 @@ const ProjectsDetails = ({ projectId }: { projectId: any }) => {
 
     return (
         <>
-            <div>
+            <div className="space-y-8">
 
-                {/* main top heading */}
-                <div className="mt-2 flex items-center justify-between">
+                {/* Project Header */}
+                <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
 
-                    <div className="">
-                        <h1 className="mt-2 text-2xl font-semibold tracking-tight text-gray-900 sm:text-3xl">
-                            {project?.project_name}
-                        </h1>
+                    <div className="space-y-3">
 
-                        <p className="mt-2 text-sm text-gray-500">
-                            {
-                                project?.project_category
-                            }
+                        <div className="flex items-center gap-2 text-sm text-gray-500">
+                            <span>Projects</span>
+                            <ChevronRight size={14} />
+                            <span className="text-gray-900 font-medium">Workspace</span>
+                        </div>
 
-                        </p>
+                        <div>
+                            <h1 className="text-2xl sm:text-3xl font-semibold tracking-tight text-gray-900">
+                                {project?.project_name}
+                            </h1>
+
+                            <p className="text-sm text-gray-500 mt-2">
+                                {project?.project_category}
+                            </p>
+                        </div>
+
                     </div>
 
+                    {/* Actions */}
+                    <div className="flex flex-wrap items-center gap-2">
 
-                    <div className="flex  gap-4">
-                        <Button onClick={() => setIsOpenaddClient(true)} variant="outline" className="flex h-11 items-center justify-center gap-2 rounded-xl px-5 text-sm shadow-sm font-medium">
-                            <Plus size={18} />
+                        <Button
+                            onClick={() => setIsOpenOldClient(true)}
+                            variant="outline"
+                            className="h-10 rounded-xl px-4 gap-2"
+                        >
+                            <Plus size={16} />
+                            Existing client
+                        </Button>
+
+                        <Button
+                            onClick={() => setIsOpenaddClient(true)}
+                            variant="outline"
+                            className="h-10 rounded-xl px-4 gap-2"
+                        >
+                            <Plus size={16} />
                             Add client
                         </Button>
-                        <Button variant="outline" className="flex h-11 items-center justify-center gap-2 rounded-xl px-5 text-sm font-medium shadow-sm transition">
-                            <Share2 size={18} />
-                            Share project
+
+                        <Button
+                            variant="default"
+                            className="h-10 rounded-xl px-4 gap-2"
+                        >
+                            <Share2 size={16} />
+                            Share
                         </Button>
-                    </div>
 
+                    </div>
 
                 </div>
 
 
+                {/* Project Overview Panel */}
+                <div className="border border-gray-200 rounded-2xl bg-white overflow-hidden">
 
+                    <div className="grid grid-cols-1 lg:grid-cols-3 divide-y lg:divide-y-0 lg:divide-x divide-gray-100">
 
+                        {/* Client */}
+                        <div className="flex items-center gap-4 p-5">
 
+                            <div className="w-11 h-11 shrink-0 rounded-xl bg-gray-100 flex items-center justify-center text-gray-700">
+                                <Building2 size={20} />
+                            </div>
 
-                <div className="p-5 grid grid-cols-1 md:grid-cols-4 gap-6 items-center">
+                            <div className="min-w-0">
+                                <p className="text-xs text-gray-500 mb-1">
+                                    Client
+                                </p>
 
-                    <div className="flex items-center gap-3 p-2">
-                        <div className="w-12 h-12 rounded-full bg-violet-100 flex items-center justify-center text-violet-600">
-                            <Building2 size={23} />
+                                <p className="font-medium text-gray-900 truncate">
+                                    {project?.client?.clientname || "No client assigned"}
+                                </p>
+                            </div>
+
                         </div>
-                        <div>
-                            <p className="font-semibold">{project?.client?.clientname || "harsh sharma"}</p>
-                            <p className="text-xs text-gray-500">Client</p>
-                        </div>
-                    </div>
 
-                    <div className="flex items-center gap-3 md:pl-6 p-2">
-                        <div className="w-12 h-12 rounded-full bg-violet-100 flex items-center justify-center text-violet-600">
-                            <CalendarDays size={23} />
+
+                        {/* Deadline */}
+                        <div className="flex items-center gap-4 p-5">
+
+                            <div className="w-11 h-11 shrink-0 rounded-xl bg-gray-100 flex items-center justify-center text-gray-700">
+                                <CalendarDays size={20} />
+                            </div>
+
+                            <div>
+                                <p className="text-xs text-gray-500 mb-1">
+                                    Deadline
+                                </p>
+
+                                <p className="font-medium text-gray-900">
+                                    {project?.deadline || "Not set"}
+                                </p>
+                            </div>
+
                         </div>
-                        <div>
-                            <p className="text-xs text-gray-500">Deadline</p>
-                            <p className="font-semibold mt-1">
-                                {project?.deadline}
+
+
+                        {/* Progress */}
+                        <div className="p-5">
+
+                            <div className="flex justify-between items-center mb-3">
+
+                                <p className="text-xs text-gray-500">
+                                    Project progress
+                                </p>
+
+                                <p className="text-sm font-semibold text-gray-900">
+                                    {progress}%
+                                </p>
+
+                            </div>
+
+                            <div className="h-2 w-full bg-gray-100 rounded-full overflow-hidden">
+                                <div
+                                    className="h-full bg-black rounded-full transition-all duration-500"
+                                    style={{ width: `${progress}%` }}
+                                />
+                            </div>
+
+                            <p className="text-xs text-gray-500 mt-2">
+                                {completedMilestones} of {milestones.length} milestones completed
                             </p>
+
                         </div>
+
                     </div>
 
-
-                    <div className="md:pl-6 p-2">
-                        <div className="flex justify-between mb-3">
-                            <p className="text-sm font-medium">Project Progress</p>
-                            <p className="text-xs text-gray-500">
-                                {completedMilestones} of {milestones.length} milestones
-                            </p>
-                        </div>
-
-                        <p className="font-bold mb-2">{progress}% completed</p>
-
-                        <div className="h-2.5 bg-violet-100 rounded-full overflow-hidden">
-                            <div
-                                className="h-full bg-violet-600 rounded-full transition-all"
-                                style={{ width: `${progress}%` }}
-                            />
-                        </div>
-                    </div>
                 </div>
 
 
-
-
-
-
-
-                {/* Summary Cards */}
-                <div className="px-5 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 mt-6">
+                {/* Summary */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
 
                     <SummaryCard
                         title="Milestones"
                         value={milestones.length}
                         subtitle={`${completedMilestones} completed`}
-                        icon={<Flag size={24} />}
+                        icon={<Flag size={20} />}
                         color="violet"
                     />
 
                     <SummaryCard
                         title="Deliverables"
-                        value={project?.milestones?.length!}
+                        value={project?.milestones?.length || 0}
                         subtitle="Project files and links"
-                        icon={<FolderOpen size={24} />}
+                        icon={<FolderOpen size={20} />}
                         color="blue"
                     />
 
                     <SummaryCard
-                        title="Pending Feedback"
+                        title="Pending feedback"
                         value={0}
-                        subtitle="Needs attention"
-                        icon={<MessageSquare size={24} />}
+                        subtitle="Awaiting client response"
+                        icon={<MessageSquare size={20} />}
                         color="orange"
                     />
 
                     <SummaryCard
                         title="Approved"
                         value={0}
-                        subtitle="Approved items"
-                        icon={<CheckCircle2 size={24} />}
+                        subtitle="Approved deliverables"
+                        icon={<CheckCircle2 size={20} />}
                         color="green"
                     />
+
                 </div>
 
 
+                {/* Workspace Tabs */}
+                <Tabs defaultValue="overview" className="w-full">
 
+                    <TabsList className="w-full justify-start h-auto bg-transparent p-0 border-b border-gray-200 rounded-none overflow-x-auto">
 
+                        <TabsTrigger
+                            value="overview"
+                            className="rounded-none px-4 py-3 border-b-2 border-transparent data-[state=active]:border-black data-[state=active]:bg-transparent data-[state=active]:shadow-none"
+                        >
+                            Overview
+                        </TabsTrigger>
 
-                {/* tabs */}
+                        <TabsTrigger
+                            value="milestones"
+                            className="rounded-none px-4 py-3 border-b-2 border-transparent data-[state=active]:border-black data-[state=active]:bg-transparent data-[state=active]:shadow-none"
+                        >
+                            Milestones
+                        </TabsTrigger>
 
-                <Tabs defaultValue="overview" className=" mt-10 px-5">
-                    <TabsList className="w-300 py-7 px-3">
-                        <TabsTrigger className="p-5" value="overview">Overview</TabsTrigger>
-                        <TabsTrigger className="p-5" value="milestones">Milestones</TabsTrigger>
-                        <TabsTrigger className="p-5" value="deliverables">Deliverables</TabsTrigger>
-                        <TabsTrigger className="p-5" value="feedback">Feedback</TabsTrigger>
-                        <TabsTrigger className="p-5" value="approvals">Approvals</TabsTrigger>
-                        <TabsTrigger className="p-5" value="activity">Activity</TabsTrigger>
-                        <TabsTrigger className="p-5" value="handover">Handover</TabsTrigger>
-                        <TabsTrigger className="p-5" value="settings">Settings</TabsTrigger>
+                        <TabsTrigger
+                            value="deliverables"
+                            className="rounded-none px-4 py-3 border-b-2 border-transparent data-[state=active]:border-black data-[state=active]:bg-transparent data-[state=active]:shadow-none"
+                        >
+                            Deliverables
+                        </TabsTrigger>
+
+                        <TabsTrigger
+                            value="feedback"
+                            className="rounded-none px-4 py-3 border-b-2 border-transparent data-[state=active]:border-black data-[state=active]:bg-transparent data-[state=active]:shadow-none"
+                        >
+                            Feedback
+                        </TabsTrigger>
+
+                        <TabsTrigger
+                            value="approvals"
+                            className="rounded-none px-4 py-3 border-b-2 border-transparent data-[state=active]:border-black data-[state=active]:bg-transparent data-[state=active]:shadow-none"
+                        >
+                            Approvals
+                        </TabsTrigger>
+
+                        <TabsTrigger
+                            value="activity"
+                            className="rounded-none px-4 py-3 border-b-2 border-transparent data-[state=active]:border-black data-[state=active]:bg-transparent data-[state=active]:shadow-none"
+                        >
+                            Activity
+                        </TabsTrigger>
+
+                        <TabsTrigger
+                            value="handover"
+                            className="rounded-none px-4 py-3 border-b-2 border-transparent data-[state=active]:border-black data-[state=active]:bg-transparent data-[state=active]:shadow-none"
+                        >
+                            Handover
+                        </TabsTrigger>
+
+                        <TabsTrigger
+                            value="settings"
+                            className="rounded-none px-4 py-3 border-b-2 border-transparent data-[state=active]:border-black data-[state=active]:bg-transparent data-[state=active]:shadow-none"
+                        >
+                            Settings
+                        </TabsTrigger>
+
                     </TabsList>
-                    <TabsContent value="overview">
+
+
+                    {/* Overview */}
+                    <TabsContent value="overview" className="pt-6">
                         <Overview project={project} />
                     </TabsContent>
 
 
-                    <TabsContent value="milestones">
+                    {/* Milestones */}
+                    <TabsContent value="milestones" className="pt-6">
                         <Card>
                             <CardHeader>
-                                <CardTitle>Overview</CardTitle>
+                                <CardTitle>Milestones</CardTitle>
                                 <CardDescription>
-                                    View your key metrics and recent project activity. Track progress
-                                    across all your active projects.
+                                    Track your project progress through milestones.
                                 </CardDescription>
                             </CardHeader>
-                            <CardContent className="text-sm text-muted-foreground">
-                                You have 12 active projects and 3 pending tasks.
+                            <CardContent>
+                                {/* Add your milestone component here */}
                             </CardContent>
                         </Card>
                     </TabsContent>
-                    <TabsContent value="deliverables">
+
+
+                    {/* Deliverables */}
+                    <TabsContent value="deliverables" className="pt-6">
                         <Card>
                             <CardHeader>
-                                <CardTitle>Overview</CardTitle>
+                                <CardTitle>Deliverables</CardTitle>
                                 <CardDescription>
-                                    View your key metrics and recent project activity. Track progress
-                                    across all your active projects.
+                                    Manage project files, links and submitted work.
                                 </CardDescription>
                             </CardHeader>
-                            <CardContent className="text-sm text-muted-foreground">
-                                You have 12 active projects and 3 pending tasks.
+                            <CardContent>
+                                {/* Add your deliverables component here */}
                             </CardContent>
                         </Card>
                     </TabsContent>
-                    <TabsContent value="feedback">
+
+
+                    {/* Feedback */}
+                    <TabsContent value="feedback" className="pt-6">
                         <Card>
                             <CardHeader>
-                                <CardTitle>Overview</CardTitle>
+                                <CardTitle>Feedback</CardTitle>
                                 <CardDescription>
-                                    View your key metrics and recent project activity. Track progress
-                                    across all your active projects.
+                                    Review feedback shared by your client.
                                 </CardDescription>
                             </CardHeader>
-                            <CardContent className="text-sm text-muted-foreground">
-                                You have 12 active projects and 3 pending tasks.
+                            <CardContent>
+                                {/* Add your feedback component here */}
                             </CardContent>
                         </Card>
                     </TabsContent>
-                    <TabsContent value="approvals">
+
+
+                    {/* Approvals */}
+                    <TabsContent value="approvals" className="pt-6">
                         <Card>
                             <CardHeader>
-                                <CardTitle>Overview</CardTitle>
+                                <CardTitle>Approvals</CardTitle>
                                 <CardDescription>
-                                    View your key metrics and recent project activity. Track progress
-                                    across all your active projects.
+                                    Track items waiting for approval and completed approvals.
                                 </CardDescription>
                             </CardHeader>
-                            <CardContent className="text-sm text-muted-foreground">
-                                You have 12 active projects and 3 pending tasks.
+                            <CardContent>
+                                {/* Add your approval component here */}
                             </CardContent>
                         </Card>
                     </TabsContent>
-                    <TabsContent value="activity">
+
+
+                    {/* Activity */}
+                    <TabsContent value="activity" className="pt-6">
                         <Card>
                             <CardHeader>
-                                <CardTitle>Overview</CardTitle>
+                                <CardTitle>Activity</CardTitle>
                                 <CardDescription>
-                                    View your key metrics and recent project activity. Track progress
-                                    across all your active projects.
+                                    Follow the recent activity of this project.
                                 </CardDescription>
                             </CardHeader>
-                            <CardContent className="text-sm text-muted-foreground">
-                                You have 12 active projects and 3 pending tasks.
+                            <CardContent>
+                                {/* Add your activity component here */}
                             </CardContent>
                         </Card>
                     </TabsContent>
-                    <TabsContent value="handover">
+
+
+                    {/* Handover */}
+                    <TabsContent value="handover" className="pt-6">
                         <Card>
                             <CardHeader>
-                                <CardTitle>Overview</CardTitle>
+                                <CardTitle>Project handover</CardTitle>
                                 <CardDescription>
-                                    View your key metrics and recent project activity. Track progress
-                                    across all your active projects.
+                                    Prepare and organize everything for the final delivery.
                                 </CardDescription>
                             </CardHeader>
-                            <CardContent className="text-sm text-muted-foreground">
-                                You have 12 active projects and 3 pending tasks.
+                            <CardContent>
+                                {/* Add your handover component here */}
                             </CardContent>
                         </Card>
                     </TabsContent>
-                    <TabsContent value="settings">
+
+
+                    {/* Settings */}
+                    <TabsContent value="settings" className="pt-6">
                         <Card>
                             <CardHeader>
-                                <CardTitle>Settings</CardTitle>
+                                <CardTitle>Project settings</CardTitle>
                                 <CardDescription>
-                                    Manage your account preferences and options. Customize your
-                                    experience to fit your needs.
+                                    Manage your project preferences and settings.
                                 </CardDescription>
                             </CardHeader>
-                            <CardContent className="text-sm text-muted-foreground">
-                                Configure notifications, security, and themes.
+                            <CardContent>
+                                {/* Add your project settings component here */}
                             </CardContent>
                         </Card>
                     </TabsContent>
+
                 </Tabs>
 
-
             </div>
-
-
-
-
             {
                 isopenaddClient && (
-                    <Addclient setIsOpenaddClient={setIsOpenaddClient} />
+                    <Addclient projectId={projectId} setIsOpenaddClient={setIsOpenaddClient} />
+                )
+            }
+            {
+                isOpenoldClient && (
+                    <AddOldclient projectid={projectId} setIsOpenOldClient={setIsOpenOldClient} />
                 )
             }
         </>
     )
 }
-
-
 const SummaryCard = ({
     title,
     value,
