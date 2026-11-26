@@ -24,7 +24,10 @@ ClientFed aims to provide one organized space where freelancers can manage their
 - Add new clients.
 - View and manage the client list.
 - Store client details, including name, email, company name, website, and phone number.
-- send invitation link to client so that client can add to their project 
+- send invitation link to client so that client can add to their project
+<img width="1407" height="825" alt="Screenshot 2026-11-26 145524" src="https://github.com/user-attachments/assets/3d47cc50-8b44-4b80-9eea-5d6d1642f5ae" />
+
+
 - Track client status (Active / Archived).
 
 
@@ -34,8 +37,8 @@ ClientFed aims to provide one organized space where freelancers can manage their
 ### Add Client for first time
 
 Add a new client by providing their contact and company information.
+<img width="1138" height="857" alt="Screenshot 2026-11-26 145340" src="https://github.com/user-attachments/assets/0803cece-8345-4516-9767-0626fcd73578" />
 
-<img width="1490" height="666" alt="addclient" src="https://github.com/user-attachments/assets/e912c5d1-6655-412c-99c6-0f0e594a53a5" />
 
 
 ### Connect with a client you've already worked with.
@@ -43,6 +46,7 @@ Add a new client by providing their contact and company information.
 just add email and automatically client added to project
 
 
+<img width="1020" height="616" alt="Screenshot 2026-11-26 145412" src="https://github.com/user-attachments/assets/903e8371-6440-469f-b57b-2a9b488fa8ff" />
 
 
 ### Client List
