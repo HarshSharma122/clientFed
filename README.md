@@ -34,13 +34,15 @@ ClientFed aims to provide one organized space where freelancers can manage their
 
 Add a new client by providing their contact and company information.
 
-![Add Client Screenshot](./screenshots/add-client.png)
+<img width="1490" height="666" alt="addclient" src="https://github.com/user-attachments/assets/e912c5d1-6655-412c-99c6-0f0e594a53a5" />
+
 
 ### Client List
 
 View and manage all added clients, including their contact details, company information, and status.
 
-![Client List Screenshot](./screenshots/client-list.png)
+<img width="1502" height="664" alt="clientlist" src="https://github.com/user-attachments/assets/7bce62ae-dcb8-4eda-8088-894e67f74e35" />
+
 
 ## Tech Stack
 
