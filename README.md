@@ -24,17 +24,25 @@ ClientFed aims to provide one organized space where freelancers can manage their
 - Add new clients.
 - View and manage the client list.
 - Store client details, including name, email, company name, website, and phone number.
+- send invitation link to client so that client can add to their project 
 - Track client status (Active / Archived).
 
 
 
 ## Screenshots
 
-### Add Client
+### Add Client for first time
 
 Add a new client by providing their contact and company information.
 
 <img width="1490" height="666" alt="addclient" src="https://github.com/user-attachments/assets/e912c5d1-6655-412c-99c6-0f0e594a53a5" />
+
+
+### Connect with a client you've already worked with.
+
+just add email and automatically client added to project
+
+
 
 
 ### Client List
@@ -81,6 +89,7 @@ Create a `.env` file in the root directory.
 ```env
 MONGODB_URI=your_mongodb_connection_string
 secret_token=your_jwt_secret
+FRONTEND_URL = https://
 ```
 
 Add any other environment variables required by your implementation.
